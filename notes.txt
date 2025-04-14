@@ -1,0 +1,20 @@
+.gitignore
+        /node_module
+        .env
+git initialise
+in frontend run npm create vite@latest
+in root run npm init -y
+install dependencies
+        npm install express mongoose jsonwebtoken bcrypt dotenv cors cookie-parser cloudinary
+        npm install -D nodemon (as a devDependency)
+
+
+write backend
+    create folder structure
+        /backend
+                config
+                controllers
+                models
+                routes
+                server.js
+
