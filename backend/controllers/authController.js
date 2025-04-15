@@ -85,15 +85,15 @@ export const signup = async (req, res) => {
 };
 export const login = async (req, res) => {
   try {
-    const { email, password } = req.body;
-    if (!email || !password) {
+    const { username, password } = req.body;
+    if (!username || !password) {
       return res.status(400).json({
         success: false,
         message: "All fields are required.",
       });
     }
 
-    const existingUser = await User.findOne({ email });
+    const existingUser = await User.findOne({ username });
     if (!existingUser) {
       return res.status(400).json({
         success: false,
