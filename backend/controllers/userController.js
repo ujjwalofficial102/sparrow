@@ -5,12 +5,7 @@ import { v2 as cloudinary } from "cloudinary";
 
 export const getUserProfile = async (req, res) => {
   const { username } = req.params;
-  if (req.user?.username !== username) {
-    return res.status(404).json({
-      success: false,
-      message: "You are not authorized to view this profile",
-    });
-  }
+
   try {
     const user = await User.findOne({ username }).select("-password");
     if (!user) {
