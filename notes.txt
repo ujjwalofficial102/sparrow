@@ -19,3 +19,8 @@ write backend
                 routes
                 server.js
 
+
+write frontend
+        install dependencies
+        import tailwindcss and daisyUI
+        

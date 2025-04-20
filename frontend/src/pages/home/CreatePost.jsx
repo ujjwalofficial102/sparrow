@@ -68,7 +68,7 @@ const CreatePost = () => {
               className="fill-secondary w-6 h-6 cursor-pointer"
               onClick={() => imgRef.current.click()}
             />
-            <BsEmojiSmileFill className="fill-yellow-500 w-5 h-5 cursor-pointer" />
+            <BsEmojiSmileFill className="fill-yellow-400 w-5 h-5 cursor-pointer" />
           </div>
           <input
             type="file"
