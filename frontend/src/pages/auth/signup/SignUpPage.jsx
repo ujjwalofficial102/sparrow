@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 import BirdSvg from "../../../components/svgs/BirdSvg.jsx";
@@ -7,7 +7,7 @@ import { MdOutlineMail } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
 import { MdPassword } from "react-icons/md";
 import { MdDriveFileRenameOutline } from "react-icons/md";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 
 const SignUpPage = () => {
@@ -18,7 +18,15 @@ const SignUpPage = () => {
     password: "",
   });
 
-  const { mutate, isError, isPending, error } = useMutation({
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
+
+  const {
+    mutate: signupMutation,
+    isError,
+    isPending,
+    error,
+  } = useMutation({
     mutationFn: async ({ email, username, fullname, password }) => {
       try {
         const res = await fetch("/api/auth/signup", {
@@ -38,14 +46,14 @@ const SignUpPage = () => {
         throw error;
       }
     },
-    onSuccess: () => {
-      toast.success("Account Created Succesfully");
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ["authUser"] });
     },
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    mutate(formData);
+    signupMutation(formData);
   };
 
   const handleInputChange = (e) => {
@@ -62,8 +70,8 @@ const SignUpPage = () => {
           className="lg:w-2/3  mx-auto md:mx-20 flex gap-4 flex-col"
           onSubmit={handleSubmit}
         >
-          <div className="flex items-center justify-between mb-8">
-            <BirdSvg className="w-24 lg:hidden fill-white" />
+          <div className="flex items-center justify-between mb-8 gap-2">
+            <BirdSvg className="w-12 lg:hidden fill-white" />
 
             <div className="text-4xl font-extrabold text-slate-50 tracking-widest">
               SPARROW
@@ -120,7 +128,7 @@ const SignUpPage = () => {
             />
           </label>
           <button className="btn rounded-full btn-primary text-white">
-            {isPending ? "Loading..." : "Sign Up"}
+            {isPending ? "Loading..." : "Sign up"}
           </button>
           {isError && (
             <p className="text-red-600 text-center text-sm">{error.message}</p>
