@@ -30,6 +30,7 @@ export const getAllPosts = async (req, res) => {
 };
 export const createPost = async (req, res) => {
   let { text, img } = req.body;
+  text = text.trim();
   if (!text && !img) {
     return res.status(400).json({
       success: false,
