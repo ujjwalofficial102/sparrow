@@ -253,7 +253,7 @@ export const getFollowingPosts = async (req, res) => {
       });
     }
 
-    const followingPosts = await Post.find({ user: { $in: user.following } })
+    const posts = await Post.find({ user: { $in: user.following } })
       .sort({ createdAt: -1 })
       .populate({
         path: "user",
@@ -265,7 +265,7 @@ export const getFollowingPosts = async (req, res) => {
       });
     res.status(200).json({
       success: true,
-      followingPosts,
+      posts,
     });
   } catch (error) {
     console.log("Error in getFollowingPosts:", error);
