@@ -11,9 +11,6 @@ const CreatePost = () => {
 
   const imgRef = useRef(null);
 
-  // const isPending = false;
-  // const isError = false;
-
   const queryClient = useQueryClient();
   const authUser = queryClient.getQueryData(["authUser"]);
 
