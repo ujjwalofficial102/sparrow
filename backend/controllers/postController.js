@@ -144,7 +144,8 @@ export const commentOnPost = async (req, res) => {
         message: "Post not found",
       });
     }
-    const { text } = req.body;
+    let { text } = req.body;
+    text = text.trim();
     if (!text) {
       return res.status(400).json({
         success: false,
