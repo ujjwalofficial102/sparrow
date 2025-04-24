@@ -5,16 +5,13 @@ import Posts from "../../components/common/Posts.jsx";
 import ProfileHeaderSkeleton from "../../components/skeletons/ProfileHeaderSkeleton.jsx";
 import EditProfileModal from "./EditProfileModal.jsx";
 
-import { POSTS } from "../../utils/db/dummy.js";
-
 import { FaArrowLeft } from "react-icons/fa6";
 import { IoCalendarOutline } from "react-icons/io5";
 import { FaLink } from "react-icons/fa";
 import { MdEdit } from "react-icons/md";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { formatMemberSinceDate } from "../../utils/date/index.js";
 import { useFollow } from "../../hooks/useFollow.jsx";
-import toast from "react-hot-toast";
 import useUpdateUserProfile from "../../hooks/useUpdateUserProfile.jsx";
 
 const ProfilePage = () => {
@@ -28,6 +25,26 @@ const ProfilePage = () => {
   const queryClient = useQueryClient();
 
   const authUser = queryClient.getQueryData(["authUser"]);
+
+  const {
+    data: userPosts,
+    isLoading: userPostsLoading,
+    refetch: userPostsRefetch,
+  } = useQuery({
+    queryKey: ["userPosts"],
+    queryFn: async () => {
+      try {
+        const res = await fetch(`/api/posts/user/${username}`);
+        const data = await res.json();
+        if (data.success === false) {
+          throw new Error(data.message || "Something went wrong");
+        }
+        return data.posts;
+      } catch (error) {
+        throw new Error(error.message);
+      }
+    },
+  });
 
   const {
     data: user,
@@ -74,7 +91,8 @@ const ProfilePage = () => {
 
   useEffect(() => {
     refetch();
-  }, [username, refetch]);
+    userPostsRefetch();
+  }, [username, refetch, userPostsRefetch]);
 
   return (
     <>
@@ -94,7 +112,9 @@ const ProfilePage = () => {
                 <div className="flex flex-col">
                   <p className="font-bold text-lg">{user?.fullname}</p>
                   <span className="text-sm text-slate-500">
-                    {POSTS?.length} posts
+                    {!userPostsLoading
+                      ? `${userPosts?.length || 0} Posts`
+                      : "Posts"}
                   </span>
                 </div>
               </div>
