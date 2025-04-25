@@ -36,7 +36,6 @@ const LoginPage = () => {
         if (data.success == false) {
           throw new Error(data.message);
         }
-        console.log(data);
         return data;
       } catch (error) {
         throw error;
