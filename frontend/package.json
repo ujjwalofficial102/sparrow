@@ -12,6 +12,7 @@
   "dependencies": {
     "@tailwindcss/vite": "^4.1.4",
     "@tanstack/react-query": "^5.74.4",
+    "02_twitter_clone": "file:..",
     "daisyui": "^5.0.25",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
