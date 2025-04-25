@@ -52,12 +52,13 @@ const Sidebar = () => {
       >
         <CiMenuBurger className="w-6 h-6 text-white" />
       </button>
-      <div className="md:flex-[2_2_0]   max-w-52 flex items-start">
+      <div className="md:flex-[2_2_0] max-w-52 flex items-start">
         <div
-          className={`fixed top-0 left-0 h-screen flex flex-col border-r border-gray-700 w-64 bg-[#101010] z-40 transition-transform duration-300 transform
-  ${
-    isSidebarOpen ? "translate-x-0" : "-translate-x-full"
-  } md:translate-x-0 md:static md:flex`}
+          className={`fixed top-0 left-0 h-screen flex flex-col border-r border-gray-700 w-52 bg-[#101010] z-40 transition-transform duration-300 transform
+      ${
+        isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+      } md:translate-x-0 md:sticky md:flex`}
+          style={{ left: 0 }}
         >
           <Link
             to="/"
@@ -102,7 +103,7 @@ const Sidebar = () => {
           {authUser.user && (
             <Link
               to={`/profile/${authUser.user.username}`}
-              className="mt-auto mb-10 flex gap-2  items-center transition-all duration-300 hover:bg-[#181818] py-2 px-4 rounded-full"
+              className="mt-auto mb-20 flex gap-2  items-center transition-all duration-300 hover:bg-[#181818] py-2 px-4 rounded-full"
             >
               <div className="avatar inline-flex">
                 <div className="w-8 rounded-full ">

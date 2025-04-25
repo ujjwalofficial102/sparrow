@@ -127,7 +127,7 @@ const ProfilePage = () => {
                 />
                 {isMyProfile && (
                   <div
-                    className="absolute top-2 right-2 rounded-full p-2 bg-black bg-opacity-75 cursor-pointer opacity-0 group-hover/cover:opacity-100 transition duration-200"
+                    className="absolute top-2 right-2 rounded-full p-2 bg-black bg-opacity-75 cursor-pointer opacity-100 group-hover/cover:opacity-100 transition duration-200"
                     onClick={() => coverImgRef.current.click()}
                   >
                     <MdEdit className="w-5 h-5 text-white" />
@@ -159,9 +159,9 @@ const ProfilePage = () => {
                       }
                     />
                     {isMyProfile && (
-                      <div className="absolute top-5 right-4 p-1 bg-primary rounded-full group-hover/avatar:opacity-100 opacity-0 cursor-pointer">
+                      <div className="absolute top-5 right-4 p-1 bg-primary rounded-full group-hover/avatar:opacity-100 opacity-100 cursor-pointer">
                         <MdEdit
-                          className="w-4 h-4 text-white"
+                          className="w-4 h-4 text-white "
                           onClick={() => profileImgRef.current.click()}
                         />
                       </div>
