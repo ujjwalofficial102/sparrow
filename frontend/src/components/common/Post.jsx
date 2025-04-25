@@ -20,6 +20,7 @@ const Post = ({ post }) => {
   const isLiked = post.likes.includes(authUser.user._id);
 
   const isMyPost = post.user._id === authUser.user._id;
+  const isAdmin = authUser.user._id.toString() === "680bb4e13b90170f038fb336"; //temporary
 
   const formattedDate = formatPostDate(post.createdAt);
 
@@ -151,7 +152,7 @@ const Post = ({ post }) => {
               <span>·</span>
               <span>{formattedDate}</span>
             </span>
-            {isMyPost && (
+            {(isMyPost || isAdmin) && (
               <span className="flex justify-end flex-1">
                 {!isDeleting && (
                   <FaTrash
